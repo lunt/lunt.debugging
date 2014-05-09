@@ -7,8 +7,8 @@
     <owners>Patrik Svensson</owners>
     <description>Use this library if you want to debug Lunt pipeline components.</description>
     <summary>Lunt is an asset pipeline and build system for games.</summary>
-    <licenseUrl>https://github.com/Lunt/Lunt/blob/master/LICENSE</licenseUrl>
-    <projectUrl>https://github.com/Lunt/Lunt</projectUrl>
+    <licenseUrl>https://github.com/Lunt/Lunt.Debugging/blob/master/LICENSE</licenseUrl>
+    <projectUrl>https://github.com/Lunt/Lunt.Debugging</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <releaseNotes>@releaseNotes@</releaseNotes>
     <copyright>Copyright (c) Patrik Svensson 2014</copyright>
