@@ -36,7 +36,7 @@ namespace Lunt.Debugging
         /// <param name="container">The container.</param>
         protected override void RegisterBuildLog(TinyIoCContainer container)
         {
-            container.Register(typeof (IBuildLog), typeof (ConsoleLog)).AsSingleton();
+            container.Register(typeof (IBuildLog), typeof (ConsoleBuildLog)).AsSingleton();
         }
 
         /// <summary>

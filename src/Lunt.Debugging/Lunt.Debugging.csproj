@@ -32,8 +32,9 @@
     <DocumentationFile>bin\Release\Lunt.Debugging.xml</DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Lunt">
-      <HintPath>..\packages\Lunt.0.0.3\lib\net45\Lunt.dll</HintPath>
+    <Reference Include="Lunt, Version=0.0.4.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Lunt.0.0.4\lib\net45\Lunt.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -44,7 +45,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ConsoleLog.cs" />
     <Compile Include="DebuggerBootstrapper.cs" />
     <Compile Include="Debugger.cs" />
     <Compile Include="DebuggerOptions.cs" />

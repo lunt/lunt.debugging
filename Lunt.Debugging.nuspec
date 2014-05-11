@@ -14,7 +14,7 @@
     <copyright>Copyright (c) Patrik Svensson 2014</copyright>
     <tags>Lunt Build Debugging</tags>
     <dependencies>
-      <dependency id="Lunt" version="[0.0.3]" />
+      <dependency id="Lunt" version="[0.0.4]" />
     </dependencies>
   </metadata>
 </package>
