@@ -49,6 +49,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DebuggerBootstrapperTests.cs" />
     <Compile Include="DebuggerOptionsTests.cs" />
     <Compile Include="DebuggerTests.cs" />
     <Compile Include="Extensions\ShouldExtensions.cs" />

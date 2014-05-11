@@ -68,6 +68,7 @@ namespace Lunt.Debugging
         protected override void ConfigureContainer(TinyIoCContainer container)
         {
             container.Register(typeof(IBuildConfigurationReader), typeof(BuildConfigurationReader)).AsSingleton();
+            container.Register(typeof(IConsoleWriter), typeof(ConsoleWriter)).AsSingleton();
         }
 
         internal T Resolve<T>()
