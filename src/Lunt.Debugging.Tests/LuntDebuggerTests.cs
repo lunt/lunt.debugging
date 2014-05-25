@@ -4,7 +4,7 @@ using Xunit;
 
 namespace Lunt.Debugging.Tests
 {
-    public sealed class DebuggerTests
+    public sealed class LuntDebuggerTests
     {
         public sealed class TheConstructor
         {
@@ -12,7 +12,7 @@ namespace Lunt.Debugging.Tests
             public void Should_Throw_If_Assembly_Is_Null()
             {
                 // Given, When, Then
-                Assert.Throws<ArgumentNullException>(() => new Debugger(null))
+                Assert.Throws<ArgumentNullException>(() => new LuntDebugger(null))
                     .ShouldHaveParameter("assembly");
             }
         }

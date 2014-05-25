@@ -7,11 +7,11 @@ using Lunt.Runtime;
 
 namespace Lunt.Debugging
 {
-    internal sealed class DebuggerConfiguration : IInternalConfiguration
+    internal sealed class LuntDebuggerConfiguration : IInternalConfiguration
     {
         private readonly Assembly _assembly;
 
-        public DebuggerConfiguration(Assembly assembly)
+        public LuntDebuggerConfiguration(Assembly assembly)
         {
             _assembly = assembly;
         }

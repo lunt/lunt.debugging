@@ -9,3 +9,6 @@
 
 ### New in 0.0.6 (Released 2015/05/25)
 * Updated Lunt NuGet package to version 0.0.5.
+
+### New in 0.0.7 (Released 2015/05/25)
+* Renamed class Debugger to LuntDebugger.

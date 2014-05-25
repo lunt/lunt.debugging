@@ -49,7 +49,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DebuggerTests.cs" />
+    <Compile Include="LuntDebuggerTests.cs" />
     <Compile Include="Extensions\ShouldExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

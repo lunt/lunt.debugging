@@ -7,15 +7,15 @@ namespace Lunt.Debugging
     /// <summary>
     /// The Lunt pipeline debugger.
     /// </summary>
-    public sealed class Debugger
+    public sealed class LuntDebugger
     {
         private readonly Assembly _assembly;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="Debugger"/> class.
+        /// Initializes a new instance of the <see cref="LuntDebugger"/> class.
         /// </summary>
         /// <param name="assembly">The assembly.</param>
-        public Debugger(Assembly assembly)
+        public LuntDebugger(Assembly assembly)
         {
             if (assembly == null)
             {
@@ -42,7 +42,7 @@ namespace Lunt.Debugging
         /// <returns>The result of the build.</returns>
         public BuildManifest Run(BuildEngineSettings settings)
         {
-            var engine = new BuildEngine(new DebuggerConfiguration(_assembly));
+            var engine = new BuildEngine(new LuntDebuggerConfiguration(_assembly));
             return engine.Build(settings);
         }
     }
