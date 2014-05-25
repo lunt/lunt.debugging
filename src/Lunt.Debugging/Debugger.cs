@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Reflection;
 using Lunt.IO;
 
 namespace Lunt.Debugging
@@ -6,109 +7,43 @@ namespace Lunt.Debugging
     /// <summary>
     /// The Lunt pipeline debugger.
     /// </summary>
-    public sealed class Debugger : IDisposable
+    public sealed class Debugger
     {
-        private readonly DebuggerBootstrapper _bootstrapper;
-        private bool _disposed;
+        private readonly Assembly _assembly;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Debugger"/> class.
         /// </summary>
-        public Debugger()
-            : this(null)
-        {            
-        }
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="Debugger"/> class.
-        /// </summary>
-        /// <param name="bootstrapper">The bootstrapper.</param>
-        public Debugger(DebuggerBootstrapper bootstrapper)
+        /// <param name="assembly">The assembly.</param>
+        public Debugger(Assembly assembly)
         {
-            _bootstrapper = bootstrapper ?? new DebuggerBootstrapper();
-            _bootstrapper.Initialize();
-        }
-
-        /// <summary>
-        /// Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
-        /// </summary>
-        public void Dispose()
-        {
-            if (!_disposed)
+            if (assembly == null)
             {
-                _bootstrapper.Dispose();
-                _disposed = true;
+                throw new ArgumentNullException("assembly");
             }
+            _assembly = assembly;
         }
 
         /// <summary>
-        /// Runs the specified path.
+        /// Runs the debugger using the specified build configuration buildConfigurationPath.
         /// </summary>
         /// <param name="buildConfigurationPath">The build configuration path.</param>
-        /// <returns>The build manifest that is the result of the build.</returns>
+        /// <returns>The result of the build.</returns>
         public BuildManifest Run(FilePath buildConfigurationPath)
         {
-            if (buildConfigurationPath == null)
-            {
-                throw new ArgumentNullException("buildConfigurationPath");
-            }
-            return Run(new DebuggerOptions(buildConfigurationPath));
+            var settings = new BuildEngineSettings(buildConfigurationPath);
+            return Run(settings);
         }
 
         /// <summary>
-        /// Runs the debugger with the specified options.
+        /// Runs the debugger using the specified build engine settings.
         /// </summary>
-        /// <param name="options">The options.</param>
-        /// <returns>The build manifest that is the result of the build.</returns>
-        public BuildManifest Run(DebuggerOptions options)
+        /// <param name="settings">The build engine settings.</param>
+        /// <returns>The result of the build.</returns>
+        public BuildManifest Run(BuildEngineSettings settings)
         {
-            if (options == null)
-            {
-                throw new ArgumentNullException("options");
-            }
-
-            var environment = _bootstrapper.Resolve<IBuildEnvironment>();
-            var workingDirectory = environment.GetWorkingDirectory();
-
-            // Get the build configuration path.
-            var buildConfigurationPath = options.BuildConfigurationPath;
-            if (buildConfigurationPath.IsRelative)
-            {
-                buildConfigurationPath = workingDirectory.Combine(buildConfigurationPath);
-            }
-
-            // Read and fix the build configuration.
-            var reader = _bootstrapper.Resolve<IBuildConfigurationReader>();
-            var configuration = reader.Read(buildConfigurationPath);
-            configuration.Incremental = false;
-            configuration.InputDirectory = options.InputPath;
-            configuration.OutputDirectory = options.OutputPath;
-
-            // Set default directories.
-            if (configuration.InputDirectory == null)
-            {
-                configuration.InputDirectory = buildConfigurationPath.GetDirectory();
-            }
-            if (configuration.OutputDirectory == null)
-            {
-                configuration.OutputDirectory = "Output";
-            }
-
-            // Make relative paths absolute.
-            if (configuration.InputDirectory.IsRelative)
-            {
-                configuration.InputDirectory = workingDirectory.Combine(configuration.InputDirectory);
-            }
-            if (configuration.OutputDirectory.IsRelative)
-            {
-                configuration.OutputDirectory = workingDirectory.Combine(configuration.OutputDirectory);
-            }
-
-            // Build the configuration and return the result.
-            using (var engine = _bootstrapper.GetEngine())
-            {
-                return engine.Build(configuration);
-            }
+            var engine = new BuildEngine(new DebuggerConfiguration(_assembly));
+            return engine.Build(settings);
         }
     }
 }

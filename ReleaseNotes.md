@@ -6,3 +6,6 @@
 
 ### New in 0.0.5 (Released 2015/05/11)
 * Fixed bug were build engine could not be resolved.
+
+### New in 0.0.6 (Released 2015/05/25)
+* Updated Lunt NuGet package to version 0.0.5.
